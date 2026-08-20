@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', ui-serif, Georgia, serif;
+
+  --color-stone-50: #faf9f7;
+  --color-stone-100: #f5f3f0;
+  --color-stone-200: #e8e4df;
+  --color-stone-300: #d4cec6;
+  --color-stone-400: #a8a092;
+  --color-stone-500: #857b6c;
+  --color-stone-600: #6b6155;
+  --color-stone-700: #524a40;
+  --color-stone-800: #3a342d;
+  --color-stone-900: #1f1c18;
+  --color-stone-950: #0f0e0c;
+
+  --color-warm-50: #fdfcfa;
+  --color-warm-100: #faf7f2;
+  --color-warm-200: #f3ede3;
+
+  --color-accent: #8b6f47;
+  --color-accent-light: #a68b5b;
+  --color-accent-dark: #725a38;
+
+  --color-success: #4a7c59;
+  --color-error: #9b4444;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-warm-50 text-stone-900;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-stone-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-stone-900 text-white text-sm tracking-wide uppercase font-medium transition-all duration-200 hover:bg-stone-800 active:bg-stone-950;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 border border-stone-300 text-stone-700 text-sm tracking-wide uppercase font-medium transition-all duration-200 hover:border-stone-500 hover:text-stone-900;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-accent text-white text-sm tracking-wide uppercase font-medium transition-all duration-200 hover:bg-accent-dark active:bg-accent-dark;
+  }
+
+  .section-padding {
+    @apply px-5 sm:px-8 lg:px-16 xl:px-24;
+  }
+
+  .heading-display {
+    @apply font-display font-normal tracking-tight;
+  }
+
+  .prose-content {
+    @apply text-stone-600 leading-relaxed;
+  }
+
+  .card {
+    @apply bg-white border border-stone-200 p-6 transition-shadow hover:shadow-sm;
+  }
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #0f0e0c;
+}
+
+.video-container iframe,
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.progress-bar {
+  height: 4px;
+  background: #e8e4df;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #8b6f47;
+  transition: width 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
