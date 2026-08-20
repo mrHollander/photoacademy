@@ -4,7 +4,7 @@ import FAQSection from '@/components/landing/FAQSection';
 
 export const metadata = {
   title: 'FAQ',
-  description: 'Frequently asked questions about the PhotoCraft smartphone photography course.',
+  description: 'Frequently asked questions about the Etili Hollander smartphone photography course.',
 };
 
 export default function FAQPage() {

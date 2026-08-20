@@ -29,10 +29,10 @@ export default function HomePage() {
                 Online Photography Course
               </p>
               <h1 className="heading-display text-4xl sm:text-5xl lg:text-6xl text-stone-900 mb-6 leading-[1.1]">
-                Take Beautiful Photos With the Phone Already in Your&nbsp;Pocket
+                Turn Everyday Moments Into Professional&nbsp;Photos
               </h1>
               <p className="text-lg text-stone-500 leading-relaxed mb-10 max-w-md">
-                Learn simple professional photography techniques that immediately improve your everyday photos. No expensive camera. No technical knowledge required.
+                Learn how to photograph your children, family, travels and everyday life beautifully — using only your smartphone.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/course/phone-photography" className="btn-primary py-4 px-10">

@@ -26,8 +26,9 @@ export default function Header() {
       }`}
     >
       <nav className="section-padding flex items-center justify-between h-16 lg:h-20">
-        <Link href="/" className="text-lg tracking-tight font-display text-stone-900">
-          PhotoCraft
+        <Link href="/" className="flex flex-col leading-tight">
+          <span className="text-lg tracking-tight font-display text-stone-900">Etili Hollander</span>
+          <span className="text-[10px] uppercase tracking-widest text-stone-500">Boutique Photography</span>
         </Link>
 
         {/* Desktop nav */}
@@ -35,15 +36,15 @@ export default function Header() {
           <Link href="/course/phone-photography" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
             Course
           </Link>
+          <Link href="/#before-after" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+            Before &amp; After
+          </Link>
           <Link href="/about" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
             About
           </Link>
-          <Link href="/faq" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
-            FAQ
-          </Link>
           {user ? (
             <Link href="/dashboard" className="btn-primary text-xs py-2.5 px-6">
-              Dashboard
+              My Course
             </Link>
           ) : (
             <div className="flex items-center gap-4">
@@ -51,7 +52,7 @@ export default function Header() {
                 Log in
               </Link>
               <Link href="/course/phone-photography" className="btn-primary text-xs py-2.5 px-6">
-                Start Learning
+                Start the Course
               </Link>
             </div>
           )}
@@ -70,15 +71,15 @@ export default function Header() {
             <Link href="/course/phone-photography" onClick={() => setOpen(false)} className="text-stone-700 py-2">
               Course
             </Link>
+            <Link href="/#before-after" onClick={() => setOpen(false)} className="text-stone-700 py-2">
+              Before &amp; After
+            </Link>
             <Link href="/about" onClick={() => setOpen(false)} className="text-stone-700 py-2">
               About
             </Link>
-            <Link href="/faq" onClick={() => setOpen(false)} className="text-stone-700 py-2">
-              FAQ
-            </Link>
             {user ? (
               <Link href="/dashboard" onClick={() => setOpen(false)} className="btn-primary text-center mt-2">
-                Dashboard
+                My Course
               </Link>
             ) : (
               <>
@@ -86,7 +87,7 @@ export default function Header() {
                   Log in
                 </Link>
                 <Link href="/course/phone-photography" onClick={() => setOpen(false)} className="btn-primary text-center mt-2">
-                  Start Learning
+                  Start the Course
                 </Link>
               </>
             )}

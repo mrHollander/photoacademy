@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <ArrowLeft size={14} />
               Site
             </Link>
-            <span className="text-sm font-medium">PhotoCraft Admin</span>
+            <span className="text-sm font-medium">Etili Hollander Admin</span>
           </div>
           <Link href="/dashboard" className="text-xs text-stone-400 hover:text-white">
             Dashboard
