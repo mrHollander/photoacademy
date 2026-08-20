@@ -4,17 +4,17 @@ import Analytics from '@/components/layout/Analytics';
 
 export const metadata: Metadata = {
   title: {
-    default: 'PhotoCraft — Take Beautiful Photos With Your Phone',
-    template: '%s | PhotoCraft',
+    default: 'Etili Hollander — Boutique Photography | Turn Everyday Moments Into Professional Photos',
+    template: '%s | Etili Hollander — Boutique Photography',
   },
-  description: 'Learn simple professional photography techniques that immediately improve your everyday smartphone photos. No expensive camera or technical knowledge required.',
+  description: 'Learn how to photograph your children, family, travels and everyday life beautifully — using only your smartphone.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://photocraft.com',
-    siteName: 'PhotoCraft',
-    title: 'PhotoCraft — Take Beautiful Photos With Your Phone',
-    description: 'Learn simple professional photography techniques that immediately improve your everyday smartphone photos.',
+    siteName: 'Etili Hollander — Boutique Photography',
+    title: 'Etili Hollander — Boutique Photography | Turn Everyday Moments Into Professional Photos',
+    description: 'Learn how to photograph your children, family, travels and everyday life beautifully — using only your smartphone.',
   },
   twitter: {
     card: 'summary_large_image',
