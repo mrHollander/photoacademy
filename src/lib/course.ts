@@ -1,5 +1,17 @@
 import { createServerSupabaseClient } from './supabase/server';
-import type { CourseWithModules, CourseProgress, Lesson } from '@/types';
+import type { Course, CourseWithModules, CourseProgress, Lesson } from '@/types';
+
+export async function getPublishedCourses(): Promise<Course[]> {
+  const supabase = await createServerSupabaseClient();
+
+  const { data: courses } = await supabase
+    .from('courses')
+    .select('*')
+    .eq('status', 'published')
+    .order('created_at');
+
+  return (courses || []) as Course[];
+}
 
 export async function getCourse(slug: string): Promise<CourseWithModules | null> {
   const supabase = await createServerSupabaseClient();

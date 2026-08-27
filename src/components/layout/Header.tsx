@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
@@ -9,6 +10,8 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const inCoursesSection = pathname?.startsWith('/course');
 
   useEffect(() => {
     const supabase = createClient();
@@ -39,15 +42,19 @@ export default function Header() {
           <Link href="/#services" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
             Services
           </Link>
-          <Link href="/course/phone-photography" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
-            Course
+          <Link href="/courses" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+            Courses
           </Link>
           <Link href="/about" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
             About
           </Link>
-          {user ? (
+          {user && inCoursesSection ? (
             <Link href="/dashboard" className="btn-primary text-xs py-2.5 px-6">
               My Course
+            </Link>
+          ) : user ? (
+            <Link href="/#contact" className="btn-primary text-xs py-2.5 px-6">
+              Work With Me
             </Link>
           ) : (
             <div className="flex items-center gap-4">
@@ -77,15 +84,19 @@ export default function Header() {
             <Link href="/#services" onClick={() => setOpen(false)} className="text-stone-700 py-2">
               Services
             </Link>
-            <Link href="/course/phone-photography" onClick={() => setOpen(false)} className="text-stone-700 py-2">
-              Course
+            <Link href="/courses" onClick={() => setOpen(false)} className="text-stone-700 py-2">
+              Courses
             </Link>
             <Link href="/about" onClick={() => setOpen(false)} className="text-stone-700 py-2">
               About
             </Link>
-            {user ? (
+            {user && inCoursesSection ? (
               <Link href="/dashboard" onClick={() => setOpen(false)} className="btn-primary text-center mt-2">
                 My Course
+              </Link>
+            ) : user ? (
+              <Link href="/#contact" onClick={() => setOpen(false)} className="btn-primary text-center mt-2">
+                Work With Me
               </Link>
             ) : (
               <>
