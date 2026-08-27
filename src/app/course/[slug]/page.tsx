@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import BeforeAfterSection from '@/components/landing/BeforeAfter';
 import CurriculumPreview from '@/components/landing/CurriculumPreview';
 import PricingSection from '@/components/landing/PricingSection';
 import FAQSection from '@/components/landing/FAQSection';
@@ -86,6 +87,10 @@ export default async function CoursePage({ params }: Props) {
             </div>
           </section>
         )}
+
+        <div id="before-after">
+          <BeforeAfterSection />
+        </div>
 
         <CurriculumPreview />
         <PricingSection />
