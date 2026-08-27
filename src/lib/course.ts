@@ -1,5 +1,23 @@
-import { createServerSupabaseClient } from './supabase/server';
+import { createAdminClient, createServerSupabaseClient } from './supabase/server';
 import type { Course, CourseWithModules, CourseProgress, Lesson } from '@/types';
+
+// Videos uploaded via the admin page are stored in the private
+// 'course-videos' bucket and referenced as 'storage:<object-path>'.
+export const STORAGE_VIDEO_PREFIX = 'storage:';
+
+export async function resolveLessonVideo(
+  videoUrl: string | null
+): Promise<{ src: string | null; isFile: boolean }> {
+  if (!videoUrl) return { src: null, isFile: false };
+  if (!videoUrl.startsWith(STORAGE_VIDEO_PREFIX)) {
+    return { src: videoUrl, isFile: false };
+  }
+
+  const path = videoUrl.slice(STORAGE_VIDEO_PREFIX.length);
+  const admin = await createAdminClient();
+  const { data } = await admin.storage.from('course-videos').createSignedUrl(path, 60 * 60 * 6);
+  return { src: data?.signedUrl || null, isFile: true };
+}
 
 export async function getPublishedCourses(): Promise<Course[]> {
   const supabase = await createServerSupabaseClient();

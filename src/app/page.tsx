@@ -2,36 +2,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { getSiteContent, getSiteImages } from '@/lib/content';
 import { Camera, Store, Megaphone, ArrowRight, GraduationCap } from 'lucide-react';
 
-const services = [
-  {
-    icon: Camera,
-    title: 'Photography',
-    text: 'Editorial and lifestyle photography for your business — styled looks, products, details and in-store imagery, shot in natural light with clean composition.',
-  },
-  {
-    icon: Store,
-    title: 'Branding',
-    text: 'A consistent visual identity for your brand. Imagery that captures the atmosphere of your store, your products and the people behind them.',
-  },
-  {
-    icon: Megaphone,
-    title: 'Social Media Content',
-    text: 'Ongoing content creation for your channels — a steady stream of refined, on-brand photos so your feed always looks as good as your shop window.',
-  },
-];
+const serviceIcons = [Camera, Store, Megaphone];
 
-const portfolio = [
-  { src: '/images/street-style.jpg', alt: 'Street style portrait of a woman in a checked jacket' },
-  { src: '/images/outfit-detail.jpg', alt: 'Styled outfit detail with layered jackets and belt' },
-  { src: '/images/coffee-truck.jpg', alt: 'Woman ordering at a coffee truck' },
-  { src: '/images/tote-detail.jpg', alt: 'Leather tote bag product photo' },
-  { src: '/images/stairs-bag.jpg', alt: 'Handbag styled on a staircase railing' },
-  { src: '/images/portrait-coat.jpg', alt: 'Profile portrait of a woman in a waxed coat' },
-];
+export default async function HomePage() {
+  const [content, images] = await Promise.all([getSiteContent(), getSiteImages()]);
 
-export default function HomePage() {
+  const services = [1, 2, 3].map((i) => ({
+    icon: serviceIcons[i - 1],
+    title: content[`home.services.${i}.title`],
+    text: content[`home.services.${i}.text`],
+  }));
+
+  const portfolio = [1, 2, 3, 4, 5, 6]
+    .map((i) => images[`home.portfolio.${i}`])
+    .filter((img) => img && img.url);
+
   return (
     <>
       <Header />
@@ -40,57 +28,63 @@ export default function HomePage() {
         <section className="section-padding pt-28 lg:pt-36 pb-16 lg:pb-24">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div className="fade-in lg:pt-6">
-              <p className="text-xs uppercase tracking-widest text-accent mb-6">Etili Hollander</p>
-              <h1 className="heading-display text-4xl sm:text-5xl lg:text-6xl text-stone-900 mb-10 leading-[1.1]">
-                Photographer &amp;<br />Content Creator
+              <p className="text-xs uppercase tracking-widest text-accent mb-6">
+                {content['home.hero.eyebrow']}
+              </p>
+              <h1 className="heading-display text-4xl sm:text-5xl lg:text-6xl text-stone-900 mb-10 leading-[1.1] whitespace-pre-line">
+                {content['home.hero.title']}
               </h1>
               <div className="mb-8">
-                <p className="text-xs uppercase tracking-widest text-accent mb-3">Who I Am</p>
-                <p className="text-stone-600 leading-relaxed max-w-md">
-                  I am a Haarlem-based photographer with a background in family and lifestyle photography. My work has always focused on natural light, clean composition and creating images that feel natural and refined.
+                <p className="text-xs uppercase tracking-widest text-accent mb-3">
+                  {content['home.hero.whoiam_label']}
                 </p>
+                <p className="text-stone-600 leading-relaxed max-w-md">{content['home.hero.whoiam']}</p>
               </div>
               <div className="mb-10">
-                <p className="text-xs uppercase tracking-widest text-accent mb-3">What I Do Today</p>
-                <p className="text-stone-600 leading-relaxed max-w-md">
-                  Today I focus on creating photography, branding and social media content for boutiques and businesses — styled looks, products, details and in-store imagery.
+                <p className="text-xs uppercase tracking-widest text-accent mb-3">
+                  {content['home.hero.whatido_label']}
                 </p>
+                <p className="text-stone-600 leading-relaxed max-w-md">{content['home.hero.whatido']}</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="#contact" className="btn-primary py-4 px-10">
-                  Work With Me
+                  {content['home.hero.cta_primary']}
                 </a>
                 <a href="#portfolio" className="btn-secondary py-4 px-10">
-                  View Portfolio
+                  {content['home.hero.cta_secondary']}
                 </a>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="col-span-2">
+              <div className="relative col-span-2 aspect-[10/7]">
                 <Image
-                  src="/images/boutique-shelf.jpg"
-                  alt="Boutique shelf styled with boots, bags and knitwear"
-                  width={1168}
-                  height={815}
+                  src={images['home.hero.main'].url}
+                  alt={images['home.hero.main'].alt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
-                  className="w-full h-auto"
+                  className="object-cover"
                 />
               </div>
-              <Image
-                src="/images/boutique-portrait.jpg"
-                alt="Portrait of a boutique owner in a leather armchair"
-                width={551}
-                height={529}
-                className="w-full h-auto"
-              />
-              <Image
-                src="/images/folded-knits.jpg"
-                alt="Folded knitwear and a leather bag in a boutique"
-                width={579}
-                height={528}
-                className="w-full h-auto"
-              />
+              <div className="relative aspect-square">
+                <Image
+                  src={images['home.hero.small1'].url}
+                  alt={images['home.hero.small1'].alt}
+                  fill
+                  sizes="25vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative aspect-square">
+                <Image
+                  src={images['home.hero.small2'].url}
+                  alt={images['home.hero.small2'].alt}
+                  fill
+                  sizes="25vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -98,9 +92,11 @@ export default function HomePage() {
         {/* Services */}
         <section id="services" className="section-padding py-20 lg:py-28 bg-warm-100 scroll-mt-16">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs uppercase tracking-widest text-accent mb-4">Services</p>
+            <p className="text-xs uppercase tracking-widest text-accent mb-4">
+              {content['home.services.eyebrow']}
+            </p>
             <h2 className="heading-display text-3xl lg:text-4xl text-stone-900 mb-12 max-w-xl">
-              Imagery for businesses that care about how they look
+              {content['home.services.title']}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {services.map(({ icon: Icon, title, text }) => (
@@ -111,30 +107,30 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-stone-500 mt-10">
-              Currently creating content for boutiques including{' '}
-              <span className="text-stone-700">Meent</span>.
-            </p>
+            <p className="text-sm text-stone-500 mt-10">{content['home.services.note']}</p>
           </div>
         </section>
 
         {/* Portfolio */}
         <section id="portfolio" className="section-padding py-20 lg:py-28 scroll-mt-16">
           <div className="max-w-6xl mx-auto">
-            <p className="text-xs uppercase tracking-widest text-accent mb-4">Selected Work</p>
+            <p className="text-xs uppercase tracking-widest text-accent mb-4">
+              {content['home.portfolio.eyebrow']}
+            </p>
             <h2 className="heading-display text-3xl lg:text-4xl text-stone-900 mb-12">
-              Recent photography
+              {content['home.portfolio.title']}
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
-              {portfolio.map(({ src, alt }) => (
-                <Image
-                  key={src}
-                  src={src}
-                  alt={alt}
-                  width={681}
-                  height={683}
-                  className="w-full h-auto"
-                />
+              {portfolio.map(({ url, alt }) => (
+                <div key={url} className="relative aspect-square">
+                  <Image
+                    src={url}
+                    alt={alt}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -144,18 +140,17 @@ export default function HomePage() {
         <section className="section-padding py-20 lg:py-28 bg-stone-900 text-white">
           <div className="max-w-3xl mx-auto text-center">
             <GraduationCap size={28} strokeWidth={1.25} className="mx-auto mb-6 text-accent-light" />
-            <p className="text-xs uppercase tracking-widest text-accent-light mb-6">Online Course</p>
+            <p className="text-xs uppercase tracking-widest text-accent-light mb-6">
+              {content['home.course.eyebrow']}
+            </p>
             <h2 className="font-display text-3xl lg:text-5xl mb-6 font-normal leading-tight">
-              Turn Everyday Moments Into Professional&nbsp;Photos
+              {content['home.course.title']}
             </h2>
             <p className="text-stone-400 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-              Learn how to photograph your children, family, travels and everyday life beautifully — using only your smartphone.
+              {content['home.course.text']}
             </p>
-            <Link
-              href="/course/phone-photography"
-              className="btn-accent py-4 px-12 inline-flex items-center gap-2"
-            >
-              Explore the Course <ArrowRight size={16} />
+            <Link href="/courses" className="btn-accent py-4 px-12 inline-flex items-center gap-2">
+              {content['home.course.cta']} <ArrowRight size={16} />
             </Link>
           </div>
         </section>
@@ -163,15 +158,17 @@ export default function HomePage() {
         {/* Contact */}
         <section id="contact" className="section-padding py-20 lg:py-28 scroll-mt-16">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-xs uppercase tracking-widest text-accent mb-4">Work Together</p>
+            <p className="text-xs uppercase tracking-widest text-accent mb-4">
+              {content['home.contact.eyebrow']}
+            </p>
             <h2 className="heading-display text-3xl lg:text-4xl text-stone-900 mb-6">
-              Let&apos;s create something for your brand
+              {content['home.contact.title']}
             </h2>
             <p className="text-stone-500 leading-relaxed mb-10 max-w-md mx-auto">
-              Tell me about your business and what you need — a one-off shoot, a full brand library, or ongoing social media content.
+              {content['home.contact.text']}
             </p>
-            <a href="mailto:hello@etilihollander.com" className="btn-primary py-4 px-12">
-              Get in Touch
+            <a href={`mailto:${content['contact.email']}`} className="btn-primary py-4 px-12">
+              {content['home.contact.cta']}
             </a>
           </div>
         </section>

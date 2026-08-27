@@ -18,6 +18,8 @@ import type { Lesson, Assignment } from '@/types';
 
 interface Props {
   lesson: Lesson;
+  videoSrc: string | null;
+  videoIsFile: boolean;
   moduleTitle: string;
   courseSlug: string;
   prev: Lesson | null;
@@ -31,6 +33,8 @@ interface Props {
 
 export default function LessonPlayer({
   lesson,
+  videoSrc,
+  videoIsFile,
   moduleTitle,
   courseSlug,
   prev,
@@ -105,9 +109,11 @@ export default function LessonPlayer({
 
         {/* Video */}
         <div className="video-container mb-8">
-          {lesson.video_url ? (
+          {videoSrc && videoIsFile ? (
+            <video src={videoSrc} controls playsInline poster={lesson.thumbnail_url || undefined} />
+          ) : videoSrc ? (
             <iframe
-              src={lesson.video_url}
+              src={videoSrc}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="border-0"

@@ -8,6 +8,7 @@ import CurriculumPreview from '@/components/landing/CurriculumPreview';
 import PricingSection from '@/components/landing/PricingSection';
 import FAQSection from '@/components/landing/FAQSection';
 import { getCourse } from '@/lib/course';
+import { getSiteContent, getSiteImages, parseFaqItems, parseStringList } from '@/lib/content';
 import { Check, Clock, Smartphone, Download } from 'lucide-react';
 
 interface Props {
@@ -32,6 +33,21 @@ export default async function CoursePage({ params }: Props) {
   const { slug } = await params;
   const course = await getCourse(slug);
   if (!course) notFound();
+
+  const [content, images] = await Promise.all([getSiteContent(), getSiteImages()]);
+  const beforeAfterColors = [
+    { beforeColor: '#7a6f63', afterColor: '#a08b6f' },
+    { beforeColor: '#5a5148', afterColor: '#c4a882' },
+    { beforeColor: '#6b5e52', afterColor: '#b09878' },
+    { beforeColor: '#8a7d6f', afterColor: '#d4c4a8' },
+  ];
+  const beforeAfterExamples = [1, 2, 3, 4].map((i) => ({
+    label: content[`ba.${i}.label`],
+    change: content[`ba.${i}.change`],
+    beforeUrl: images[`ba.${i}.before`]?.url || '',
+    afterUrl: images[`ba.${i}.after`]?.url || '',
+    ...beforeAfterColors[i - 1],
+  }));
 
   const totalLessons = course.modules.reduce((sum, m) => sum + (m.lessons?.length || 0), 0);
   const totalMinutes = course.modules
@@ -89,12 +105,30 @@ export default async function CoursePage({ params }: Props) {
         )}
 
         <div id="before-after">
-          <BeforeAfterSection />
+          <BeforeAfterSection
+            eyebrow={content['ba.eyebrow']}
+            title={content['ba.title']}
+            text={content['ba.text']}
+            examples={beforeAfterExamples}
+          />
         </div>
 
-        <CurriculumPreview />
-        <PricingSection />
-        <FAQSection />
+        <CurriculumPreview modules={course.modules} />
+        <PricingSection
+          eyebrow={content['pricing.eyebrow']}
+          title={content['pricing.title']}
+          text={content['pricing.text']}
+          features={parseStringList(content['pricing.features'], 'pricing.features')}
+          footnote={content['pricing.footnote']}
+          productName={course.title}
+          price={course.price}
+          courseSlug={course.slug}
+        />
+        <FAQSection
+          eyebrow={content['faq.eyebrow']}
+          title={content['faq.title']}
+          items={parseFaqItems(content['faq.items'])}
+        />
       </main>
       <Footer />
     </>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getPublishedCourses } from '@/lib/course';
+import { getSiteContent } from '@/lib/content';
 import { Camera, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CoursesPage() {
-  const courses = await getPublishedCourses();
+  const [courses, content] = await Promise.all([getPublishedCourses(), getSiteContent()]);
 
   return (
     <>
@@ -20,16 +21,16 @@ export default async function CoursesPage() {
       <main>
         <section className="section-padding pt-28 lg:pt-36 pb-16 lg:pb-24">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs uppercase tracking-widest text-accent mb-4">Online Courses</p>
+            <p className="text-xs uppercase tracking-widest text-accent mb-4">{content['courses.eyebrow']}</p>
             <h1 className="heading-display text-4xl sm:text-5xl text-stone-900 mb-6 leading-[1.1]">
-              Learn photography, one practical lesson at a&nbsp;time
+              {content['courses.title']}
             </h1>
             <p className="text-lg text-stone-500 leading-relaxed max-w-2xl mb-16">
-              Every course teaches specific, practical skills you can apply immediately — no jargon, no expensive equipment.
+              {content['courses.text']}
             </p>
 
             {courses.length === 0 ? (
-              <p className="text-stone-500">No courses are available right now — check back soon.</p>
+              <p className="text-stone-500">{content['courses.empty']}</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {courses.map((course) => (
