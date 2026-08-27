@@ -4,17 +4,17 @@ import Analytics from '@/components/layout/Analytics';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Etili Hollander — Boutique Photography | Turn Everyday Moments Into Professional Photos',
+    default: 'Etili Hollander — Boutique Photography | Photographer & Content Creator',
     template: '%s | Etili Hollander — Boutique Photography',
   },
-  description: 'Learn how to photograph your children, family, travels and everyday life beautifully — using only your smartphone.',
+  description: 'Haarlem-based photographer creating photography, branding and social media content for boutiques and businesses — plus an online smartphone photography course.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://photocraft.com',
     siteName: 'Etili Hollander — Boutique Photography',
-    title: 'Etili Hollander — Boutique Photography | Turn Everyday Moments Into Professional Photos',
-    description: 'Learn how to photograph your children, family, travels and everyday life beautifully — using only your smartphone.',
+    title: 'Etili Hollander — Boutique Photography | Photographer & Content Creator',
+    description: 'Haarlem-based photographer creating photography, branding and social media content for boutiques and businesses — plus an online smartphone photography course.',
   },
   twitter: {
     card: 'summary_large_image',

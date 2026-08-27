@@ -9,8 +9,22 @@ export default function Footer() {
             <p className="font-display text-xl text-stone-900 mb-1">Etili Hollander</p>
             <p className="text-xs uppercase tracking-widest text-stone-500 mb-3">Boutique Photography</p>
             <p className="text-sm text-stone-500 leading-relaxed max-w-sm">
-              Learn to take photos you actually want to keep — using only the phone already in your pocket.
+              Photography, branding and social media content for boutiques and businesses — and an online course for everyone who wants to take better photos.
             </p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wider text-stone-400 mb-4">Studio</p>
+            <div className="flex flex-col gap-2.5">
+              <Link href="/#portfolio" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+                Portfolio
+              </Link>
+              <Link href="/#services" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+                Services
+              </Link>
+              <Link href="/#contact" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+                Contact
+              </Link>
+            </div>
           </div>
           <div>
             <p className="text-xs uppercase tracking-wider text-stone-400 mb-4">Learn</p>
@@ -21,11 +35,6 @@ export default function Footer() {
               <Link href="/faq" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
                 FAQ
               </Link>
-            </div>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-wider text-stone-400 mb-4">Company</p>
-            <div className="flex flex-col gap-2.5">
               <Link href="/about" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
                 About
               </Link>

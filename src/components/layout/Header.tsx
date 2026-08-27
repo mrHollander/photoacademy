@@ -33,11 +33,14 @@ export default function Header() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
+          <Link href="/#portfolio" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+            Portfolio
+          </Link>
+          <Link href="/#services" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+            Services
+          </Link>
           <Link href="/course/phone-photography" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
             Course
-          </Link>
-          <Link href="/#before-after" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
-            Before &amp; After
           </Link>
           <Link href="/about" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
             About
@@ -51,8 +54,8 @@ export default function Header() {
               <Link href="/login" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
                 Log in
               </Link>
-              <Link href="/course/phone-photography" className="btn-primary text-xs py-2.5 px-6">
-                Start the Course
+              <Link href="/#contact" className="btn-primary text-xs py-2.5 px-6">
+                Work With Me
               </Link>
             </div>
           )}
@@ -68,11 +71,14 @@ export default function Header() {
       {open && (
         <div className="md:hidden bg-warm-50 border-b border-stone-200 px-5 pb-6 pt-2">
           <div className="flex flex-col gap-4">
+            <Link href="/#portfolio" onClick={() => setOpen(false)} className="text-stone-700 py-2">
+              Portfolio
+            </Link>
+            <Link href="/#services" onClick={() => setOpen(false)} className="text-stone-700 py-2">
+              Services
+            </Link>
             <Link href="/course/phone-photography" onClick={() => setOpen(false)} className="text-stone-700 py-2">
               Course
-            </Link>
-            <Link href="/#before-after" onClick={() => setOpen(false)} className="text-stone-700 py-2">
-              Before &amp; After
             </Link>
             <Link href="/about" onClick={() => setOpen(false)} className="text-stone-700 py-2">
               About
@@ -86,8 +92,8 @@ export default function Header() {
                 <Link href="/login" onClick={() => setOpen(false)} className="text-stone-700 py-2">
                   Log in
                 </Link>
-                <Link href="/course/phone-photography" onClick={() => setOpen(false)} className="btn-primary text-center mt-2">
-                  Start the Course
+                <Link href="/#contact" onClick={() => setOpen(false)} className="btn-primary text-center mt-2">
+                  Work With Me
                 </Link>
               </>
             )}
