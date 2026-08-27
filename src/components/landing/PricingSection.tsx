@@ -5,7 +5,27 @@ import { Check } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { useEffect, useRef } from 'react';
 
-export default function PricingSection() {
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  features: string[];
+  footnote: string;
+  productName: string;
+  price: number; // cents
+  courseSlug: string;
+}
+
+export default function PricingSection({
+  eyebrow,
+  title,
+  text,
+  features,
+  footnote,
+  productName,
+  price,
+  courseSlug,
+}: Props) {
   const tracked = useRef(false);
 
   useEffect(() => {
@@ -25,32 +45,19 @@ export default function PricingSection() {
     }
   }, []);
 
-  const features = [
-    'Lifetime access to all lessons',
-    'Future lesson updates included',
-    'Watch on phone, tablet, or desktop',
-    'Practical challenges with every module',
-    'No photography equipment required',
-    'Works with any smartphone',
-  ];
+  const displayPrice = `€${(price / 100).toFixed(0)}`;
 
   return (
     <section id="pricing" className="section-padding py-20 lg:py-32">
       <div className="max-w-lg mx-auto text-center">
-        <p className="text-xs uppercase tracking-widest text-accent mb-4">Start Today</p>
-        <h2 className="heading-display text-3xl lg:text-4xl text-stone-900 mb-4">
-          Better photos start here
-        </h2>
-        <p className="text-stone-500 mb-12">
-          One course. Lifetime access. Immediate results.
-        </p>
+        <p className="text-xs uppercase tracking-widest text-accent mb-4">{eyebrow}</p>
+        <h2 className="heading-display text-3xl lg:text-4xl text-stone-900 mb-4">{title}</h2>
+        <p className="text-stone-500 mb-12">{text}</p>
 
         <div className="bg-white border border-stone-200 p-8 lg:p-12">
-          <p className="text-sm uppercase tracking-wider text-stone-500 mb-2">
-            Take Beautiful Photos With Your Phone
-          </p>
+          <p className="text-sm uppercase tracking-wider text-stone-500 mb-2">{productName}</p>
           <div className="flex items-baseline justify-center gap-1 mb-8">
-            <span className="text-5xl font-display text-stone-900">€69</span>
+            <span className="text-5xl font-display text-stone-900">{displayPrice}</span>
             <span className="text-stone-400 text-sm">one-time</span>
           </div>
 
@@ -64,16 +71,14 @@ export default function PricingSection() {
           </ul>
 
           <Link
-            href="/checkout?course=phone-photography"
-            onClick={() => trackEvent('checkout_started', { course: 'phone-photography', price: 6900 })}
+            href={`/checkout?course=${courseSlug}`}
+            onClick={() => trackEvent('checkout_started', { course: courseSlug, price })}
             className="btn-primary w-full py-4 text-sm"
           >
-            Start the Course — €69
+            Start the Course — {displayPrice}
           </Link>
 
-          <p className="text-xs text-stone-400 mt-4">
-            Secure payment via Stripe. 14-day money-back guarantee.
-          </p>
+          <p className="text-xs text-stone-400 mt-4">{footnote}</p>
         </div>
       </div>
     </section>

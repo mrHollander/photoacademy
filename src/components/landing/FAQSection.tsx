@@ -2,55 +2,25 @@
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import type { FaqItem } from '@/lib/content-shared';
 
-const faqs = [
-  {
-    q: 'Do I need an iPhone?',
-    a: 'No. This course works with any modern smartphone — iPhone, Samsung, Google Pixel, or any Android device with a camera. The techniques are universal.',
-  },
-  {
-    q: 'Does this work with Android?',
-    a: 'Absolutely. While some screenshots show iPhone, every technique applies equally to Android. Smartphone cameras share the same fundamental principles.',
-  },
-  {
-    q: 'Do I need photography experience?',
-    a: 'None at all. This course is designed for complete beginners. If you can take a photo with your phone, you have all the skills you need to start.',
-  },
-  {
-    q: 'How long is the course?',
-    a: 'The course contains around 30 short lessons, each between 3 and 8 minutes. You can complete the entire course in a weekend, or take one lesson per day over a month.',
-  },
-  {
-    q: 'Can I watch it on my phone?',
-    a: 'Yes. The platform is designed mobile-first. You can watch lessons on your phone, tablet, or desktop — wherever is most comfortable.',
-  },
-  {
-    q: 'How long do I have access?',
-    a: 'Lifetime. Once you purchase the course, you keep access forever — including any future updates and new lessons we add.',
-  },
-  {
-    q: 'Is this suitable for parents?',
-    a: 'This course was designed with parents in mind. Several lessons specifically cover photographing children, family moments, birthday parties, and everyday life at home.',
-  },
-  {
-    q: 'Do I need editing software?',
-    a: "No. The editing lessons use the free editing tools built into your phone's photo app. No additional apps or subscriptions required.",
-  },
-];
+interface Props {
+  eyebrow: string;
+  title: string;
+  items: FaqItem[];
+}
 
-export default function FAQSection() {
+export default function FAQSection({ eyebrow, title, items }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section id="faq" className="section-padding py-20 lg:py-32 bg-stone-50">
       <div className="max-w-2xl mx-auto">
-        <p className="text-xs uppercase tracking-widest text-accent mb-4">Common Questions</p>
-        <h2 className="heading-display text-3xl lg:text-4xl text-stone-900 mb-12">
-          Frequently asked questions
-        </h2>
+        <p className="text-xs uppercase tracking-widest text-accent mb-4">{eyebrow}</p>
+        <h2 className="heading-display text-3xl lg:text-4xl text-stone-900 mb-12">{title}</h2>
 
         <div className="space-y-px">
-          {faqs.map((faq, i) => (
+          {items.map((faq, i) => (
             <div key={i} className="bg-white border border-stone-200">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}

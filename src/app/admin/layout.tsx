@@ -1,9 +1,11 @@
 import Link from 'next/link';
-import { BookOpen, Layers, FileText, Users, Receipt, ArrowLeft } from 'lucide-react';
+import { BookOpen, Layers, FileText, ImageIcon, Users, Receipt, ArrowLeft } from 'lucide-react';
 
 const navItems = [
   { href: '/admin', label: 'Overview', icon: Layers },
   { href: '/admin/courses', label: 'Courses', icon: BookOpen },
+  { href: '/admin/content', label: 'Site Text', icon: FileText },
+  { href: '/admin/photos', label: 'Photos', icon: ImageIcon },
   { href: '/admin/users', label: 'Users', icon: Users },
   { href: '/admin/orders', label: 'Orders', icon: Receipt },
 ];

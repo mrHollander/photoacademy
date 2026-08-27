@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { getCourse, checkEnrollment, getAdjacentLessons } from '@/lib/course';
+import { getCourse, checkEnrollment, getAdjacentLessons, resolveLessonVideo } from '@/lib/course';
 import LessonPlayer from '@/components/course/LessonPlayer';
 import CourseSidebar from '@/components/course/CourseSidebar';
 import type { Lesson } from '@/types';
@@ -58,6 +58,8 @@ export default async function LessonPage({ params }: Props) {
 
   const { prev, next } = getAdjacentLessons(course.modules, currentLesson.id);
 
+  const video = await resolveLessonVideo(currentLesson.video_url);
+
   // Get progress if logged in
   let completed = false;
   if (user) {
@@ -86,6 +88,8 @@ export default async function LessonPage({ params }: Props) {
       />
       <LessonPlayer
         lesson={currentLesson}
+        videoSrc={video.src}
+        videoIsFile={video.isFile}
         moduleTitle={currentModuleTitle}
         courseSlug={slug}
         prev={prev}

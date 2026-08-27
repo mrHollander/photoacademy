@@ -26,9 +26,14 @@ export default async function AdminCoursesPage() {
                 <h2 className="font-medium text-stone-900">{course.title}</h2>
                 <p className="text-sm text-stone-500 mt-1">/{course.slug} — €{(course.price / 100).toFixed(0)} — {course.status}</p>
               </div>
-              <span className={`text-xs px-3 py-1 ${course.status === 'published' ? 'bg-success/10 text-success' : 'bg-stone-100 text-stone-500'}`}>
-                {course.status}
-              </span>
+              <div className="flex items-center gap-3">
+                <span className={`text-xs px-3 py-1 ${course.status === 'published' ? 'bg-success/10 text-success' : 'bg-stone-100 text-stone-500'}`}>
+                  {course.status}
+                </span>
+                <Link href={`/admin/courses/${course.id}`} className="btn-secondary text-xs py-1.5 px-4">
+                  Edit
+                </Link>
+              </div>
             </div>
           </div>
 

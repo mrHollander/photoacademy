@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import { getSiteContent } from '@/lib/content';
 
-export default function Footer() {
+export default async function Footer() {
+  const content = await getSiteContent();
   return (
     <footer className="border-t border-stone-200 bg-stone-50">
       <div className="section-padding py-16 lg:py-20">
@@ -9,7 +11,7 @@ export default function Footer() {
             <p className="font-display text-xl text-stone-900 mb-1">Etili Hollander</p>
             <p className="text-xs uppercase tracking-widest text-stone-500 mb-3">Boutique Photography</p>
             <p className="text-sm text-stone-500 leading-relaxed max-w-sm">
-              Photography, branding and social media content for boutiques and businesses — and an online course for everyone who wants to take better photos.
+              {content['footer.tagline']}
             </p>
           </div>
           <div>
